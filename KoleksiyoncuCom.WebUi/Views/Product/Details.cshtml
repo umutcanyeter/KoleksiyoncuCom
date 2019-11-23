@@ -1,0 +1,35 @@
+﻿@model KoleksiyoncuCom.WebUi.Models.ProductDetailsViewModel
+@{
+    ViewData["Title"] = "Detaylar | " + Model.Product.ProductName;
+    Layout = "~/Views/_Layout.cshtml";
+}
+    <div class="container-fluid">
+        <div class="row pb-5">
+            <div class="col-4">
+                <img src="@Model.Product.ImageUrl" class="img-fluid" alt="@Model.Product.ProductName">
+            </div>
+            <div class="col-6">
+                <h3>@Model.Product.ProductName</h3>
+                <h6>Stok: @Model.Product.ProductUnitsInStock</h6>
+                <br />
+                <h5>@Model.Product.ProductUnitPrice TL</h5>
+                <br />
+                <a href="#" class="btn btn-outline-success">Sepete Ekle</a>
+            </div>
+            <div class="col-2">
+                <h3>Satıcı</h3>
+                <h5>@Model.Seller.NameAndSurname</h5>
+                <h6>Memmnuniyet: 5 / @Model.Seller.Rate</h6>
+                <h6>@Model.Seller.PhoneNumber</h6>
+                <h6>@Model.Seller.EmailAdress</h6>
+                <h6>@Model.Seller.Location</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>Açıklama</h3>
+                <p>@Model.Product.Description</p>
+            </div>
+        </div>
+    </div>
+

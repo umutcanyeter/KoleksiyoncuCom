@@ -1,0 +1,17 @@
+﻿<div class="container">
+    <div class="row">
+        @foreach (var product in Model.Product)
+        {
+        <div class="p-2">
+            <div class="card" style="width: 18rem; height: 28rem;">
+                <img src="@product.ImageUrl" class="card-img-top" alt="@product.ProductName">
+                <div class="card-body">
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId" class="card-title">@product.ProductName</a>
+                    <p class="card-text">@product.ProductUnitsInStock</p>
+                </div>
+                <a href="#" class="btn btn-outline-info" style="margin:2px;">Sepete Ekle (@product.ProductUnitPrice TL)</a>
+            </div>
+        </div>
+        }
+    </div>
+</div>
