@@ -1,4 +1,5 @@
-﻿using KoleksiyoncuCom.Entities;
+﻿using KoleksiyoncuCom.Entites;
+using KoleksiyoncuCom.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace KoleksiyoncuCom.DataAccess.Concrete.EntityFramework
@@ -12,5 +13,6 @@ namespace KoleksiyoncuCom.DataAccess.Concrete.EntityFramework
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Seller> Sellers { get; set; }
+        public DbSet<UsersAndSellers> UsersAndSellers { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+﻿@model KoleksiyoncuCom.WebUi.Models.LoginModel
+@{
+    ViewData["Title"] = "GirisYap";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="text-center col-4">
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="text-danger">@ViewBag.ErrorMessage</div>
+            }
+            <form class="form-signin" asp-controller="Hesap" asp-action="GirisYap" method="post">
+                <h1 class="text-success">Koleksiyoncu</h1>
+                <h3 class="h3 mb-3 font-weight-normal">Giriş Yap</h3>
+                <label asp-for="UserName" class="sr-only"></label>
+                <input asp-for="UserName" value="@Model.UserName" class="form-control" placeholder="Kullanıcı Adı">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                <label asp-for="Password" class="sr-only"></label>
+                <input asp-for="Password" value="@Model.Password" class="form-control" placeholder="Parola">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <button class="btn btn-lg btn-success btn-block" type="submit">Giriş Yap</button>
+                <p class="mt-5 mb-3 text-muted">&copy;2019 Duru Yazılım Teknolojileri A.Ş.</p>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+

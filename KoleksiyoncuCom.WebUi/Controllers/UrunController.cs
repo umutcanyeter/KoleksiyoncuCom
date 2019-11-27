@@ -8,16 +8,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KoleksiyoncuCom.WebUi.Controllers
 {
-    public class ProductController : Controller
+    public class UrunController : Controller
     {
         private IProductService _productService;
         private ISellerService _sellerService;
-        public ProductController(IProductService productService, ISellerService sellerService)
+        public UrunController(IProductService productService, ISellerService sellerService)
         {
             _productService = productService;
             _sellerService = sellerService;
         }
-        public IActionResult Details(int? id)
+        public IActionResult Detay(int? id)
         {
             if(id == null)
             {
