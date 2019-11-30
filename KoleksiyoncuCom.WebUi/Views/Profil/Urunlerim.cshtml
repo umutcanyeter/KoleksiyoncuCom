@@ -1,0 +1,13 @@
+﻿@model KoleksiyoncuCom.WebUi.Models.ProfileProductsViewModel
+@{
+    ViewData["Title"] = "Ürünlerim";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h1>Ürünlerim</h1>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-info" role="alert">@TempData["message"]</div>
+}
+<partial name="_profileProducts" />
+

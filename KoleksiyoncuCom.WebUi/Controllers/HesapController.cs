@@ -7,6 +7,7 @@ using KoleksiyoncuCom.Entites;
 using KoleksiyoncuCom.Entities;
 using KoleksiyoncuCom.WebUi.Identity;
 using KoleksiyoncuCom.WebUi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -81,8 +82,10 @@ namespace KoleksiyoncuCom.WebUi.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
             if (result.Succeeded)
             {
-
-                var seller = User.Identity;
+                CookieOptions loginInCookie = new CookieOptions();
+                loginInCookie.Expires = DateTime.Now.AddMinutes(60);
+                Response.Cookies.Append("loginInCookie", user.Id, loginInCookie);
+                
                 return Redirect(returnUrl);
             }
             ModelState.AddModelError("", "Kullanıcı adı veya parola yanlış!");
@@ -91,6 +94,7 @@ namespace KoleksiyoncuCom.WebUi.Controllers
 
         public async Task<IActionResult> CikisYap()
         {
+            Response.Cookies.Delete("loginInCookie");
             await _signInManager.SignOutAsync();
             return Redirect("~/");
         }

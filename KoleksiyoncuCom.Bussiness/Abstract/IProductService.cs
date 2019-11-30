@@ -9,6 +9,7 @@ namespace KoleksiyoncuCom.Bussiness.Abstract
     {
         List<Product> GetAll();
         List<Product> GetByCategory(int categoryId);
+        List<Product> GetBySellerId(int sellerId);
         Product GetById(int productId);
         void Add(Product product);
         void Update(Product product);

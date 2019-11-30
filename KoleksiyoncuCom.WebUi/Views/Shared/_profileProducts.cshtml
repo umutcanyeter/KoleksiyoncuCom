@@ -1,0 +1,20 @@
+﻿<div class="container">
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="p-2">
+                <div class="card" style="width: 18rem; height: 28rem;">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.ProductName">
+                    <div class="card-body">
+                        <a asp-controller="Urun" asp-action="Detay" asp-route-id="@product.ProductId" class="card-title">@product.ProductName</a>
+                        <p class="card-text">@product.ProductUnitsInStock</p>
+                    </div>
+                    <div>
+                        <a asp-controller="Profil" asp-action="Guncelle" asp-route-id="@product.ProductId" class="btn btn-outline-success" style="margin:2px;">Güncelle</a>
+                        <a asp-controller="Profil" asp-action="Sil" asp-route-id="@product.ProductId" class="btn btn-outline-danger" style="margin:2px;">Kaldır</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model KoleksiyoncuCom.WebUi.Models.ProfileSettingsViewModel
+@{
+    ViewData["Title"] = "Profil Ayarları";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h1>Profilini Düzenle</h1>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-info" role="alert">@TempData["message"]</div>
+}
+<form asp-action="Ayarlar" asp-controller="Profil" method="post">
+    <div class="form-group">
+        <label>Kullanıcı Adı</label>
+        <input asp-for="Seller.NameAndSurname" type="text" class="form-control" value="@Model.Seller.NameAndSurname">
+    </div>
+    <div class="form-group">
+        <label>Telefon Numarası</label>
+        <input asp-for="Seller.PhoneNumber" type="tel" class="form-control" value="@Model.Seller.PhoneNumber">
+    </div>
+    <div class="form-group">
+        <label>E-Posta Adresi</label>
+        <input asp-for="Seller.EmailAdress" type="email" class="form-control" value="@Model.Seller.EmailAdress">
+    </div>
+    <div class="form-group">
+        <label>Konum</label>
+        <input asp-for="Seller.Location" type="text" class="form-control" value="@Model.Seller.Location">
+    </div>
+    <div class="form-group">
+        <input asp-for="Seller.SellerId" type="hidden" class="form-control" value="@Model.Seller.SellerId">
+    </div>
+    <button type="submit" class="btn btn-success">Bilgileri Güncelle</button>
+</form>

@@ -39,6 +39,11 @@ namespace KoleksiyoncuCom.Bussiness.Concrete
             return _productDal.Get(p => p.ProductId == productId);
         }
 
+        public List<Product> GetBySellerId(int sellerId)
+        {
+            return _productDal.GetList(p => p.SellerId == sellerId);
+        }
+
         public void Update(Product product)
         {
             _productDal.Update(product);
