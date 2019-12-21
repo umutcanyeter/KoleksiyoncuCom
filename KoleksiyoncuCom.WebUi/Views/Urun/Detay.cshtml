@@ -12,9 +12,19 @@
                 <h3>@Model.Product.ProductName</h3>
                 <h6>Stok: @Model.Product.ProductUnitsInStock</h6>
                 <br />
-                <h5>@Model.Product.ProductUnitPrice TL</h5>
+                <h5>@Model.Product.ProductUnitPrice &#8378;</h5>
                 <br />
-                <a href="#" class="btn btn-outline-success">Sepete Ekle</a>
+                <form asp-controller="Sepet" asp-action="SepeteEkle" method="post" class="form-inline">
+                    <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+                    <div class="input-group mb-3">
+                        <input type="number" name="quantity" class="form-control" value="1" min="1" step="1" max="@Model.Product.ProductUnitsInStock" style="width:100px;" />
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-success">
+                                Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col-2">
                 <h3>Satıcı</h3>

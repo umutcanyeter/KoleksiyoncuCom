@@ -2,16 +2,23 @@
     <div class="row">
         @foreach (var product in Model.Product)
         {
-        <div class="p-2">
-            <div class="card" style="width: 18rem; height: 28rem;">
-                <img src="@product.ImageUrl" class="card-img-top" alt="@product.ProductName">
-                <div class="card-body">
-                    <a asp-controller="Urun" asp-action="Detay" asp-route-id="@product.ProductId" class="card-title">@product.ProductName</a>
-                    <p class="card-text">@product.ProductUnitsInStock</p>
+            <div class="p-2">
+                <div class="card" style="width: 13rem; height: 22rem;">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.ProductName">
+                    <div class="card-body">
+                        <a asp-controller="Urun" asp-action="Detay" asp-route-id="@product.ProductId" class="card-title">@product.ProductName</a>
+                        <p class="card-text">@product.ProductUnitPrice &#8378;</p>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form class="px-5 pb-2" asp-controller="Sepet" asp-action="SepeteEkle" method="post" style="display:inline;">
+                            <input type="hidden" name="productId" value="@product.ProductId" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <button type="submit" class="btn btn-outline-success">Sepete Ekle</button>
+                        </form>
+                    }
                 </div>
-                <a href="#" class="btn btn-outline-info" style="margin:2px;">Sepete Ekle (@product.ProductUnitPrice TL)</a>
             </div>
-        </div>
         }
     </div>
 </div>

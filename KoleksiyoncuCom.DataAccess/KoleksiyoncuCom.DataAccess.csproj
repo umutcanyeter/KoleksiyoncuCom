@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KoleksiyoncuCom.Core\KoleksiyoncuCom.Core.csproj" />
-    <ProjectReference Include="..\KoleksiyoncuCom.Entites\KoleksiyoncuCom.Entites.csproj" />
+    <ProjectReference Include="..\KoleksiyoncuCom.Entites\KoleksiyoncuCom.Entities.csproj" />
   </ItemGroup>
 
 </Project>

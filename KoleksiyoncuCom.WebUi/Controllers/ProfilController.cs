@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using KoleksiyoncuCom.Bussiness.Abstract;
 using KoleksiyoncuCom.Entities;
+using KoleksiyoncuCom.WebUi.Identity;
 using KoleksiyoncuCom.WebUi.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KoleksiyoncuCom.WebUi.Controllers
@@ -17,21 +19,18 @@ namespace KoleksiyoncuCom.WebUi.Controllers
         private ISellerService _sellerService;
         private IProductService _productService;
         private ICategoryService _categoryService;
-        public ProfilController(ICategoryService categoryService, IProductService productService, IUsersAndSellersService usersAndSellersService, ISellerService sellerService)
+        private UserManager<ApplicationUser> _userManager;
+        public ProfilController(UserManager<ApplicationUser> userManager, ICategoryService categoryService, IProductService productService, IUsersAndSellersService usersAndSellersService, ISellerService sellerService)
         {
             _usersAndSellersService = usersAndSellersService;
             _sellerService = sellerService;
             _productService = productService;
             _categoryService = categoryService;
+            _userManager = userManager;
         }
         public IActionResult Ayarlar()
         {
-            if (Request.Cookies["loginInCookie"] == null)
-            {
-                return NotFound();
-            }
-            var cookie = Request.Cookies["loginInCookie"].ToString();
-            var usersAndProfile = _usersAndSellersService.GetByUserId(cookie);
+            var usersAndProfile = _usersAndSellersService.GetByUserId(_userManager.GetUserId(User));
             var sellerId = usersAndProfile.SellerId;
             var seller = _sellerService.GetById(sellerId);
             var profileSettingsViewModel = new ProfileSettingsViewModel
@@ -51,7 +50,7 @@ namespace KoleksiyoncuCom.WebUi.Controllers
 
         public IActionResult Urunlerim()
         {
-            var userId = Request.Cookies["loginInCookie"].ToString();
+            var userId = _userManager.GetUserId(User);
             var sellerId = _usersAndSellersService.GetByUserId(userId).SellerId;
             List<Product> products = _productService.GetBySellerId(sellerId);
             var profileProductsViewModel = new ProfileProductsViewModel
@@ -63,12 +62,8 @@ namespace KoleksiyoncuCom.WebUi.Controllers
 
         public IActionResult Guncelle(int? id)
         {
-            if (Request.Cookies["loginInCookie"] == null)
-            {
-                return NotFound();
-            }
             var productsSellerId = _productService.GetById((int)id).SellerId;
-            var authorizedSellerId = _usersAndSellersService.GetByUserId(Request.Cookies["loginInCookie"].ToString()).SellerId;
+            var authorizedSellerId = _usersAndSellersService.GetByUserId(_userManager.GetUserId(User)).SellerId;
             if(productsSellerId != authorizedSellerId)
             {
                 return NotFound();
@@ -99,12 +94,8 @@ namespace KoleksiyoncuCom.WebUi.Controllers
 
         public IActionResult Sil(int? id)
         {
-            if (Request.Cookies["loginInCookie"] == null)
-            {
-                return NotFound();
-            }
             var productsSellerId = _productService.GetById((int)id).SellerId;
-            var authorizedSellerId = _usersAndSellersService.GetByUserId(Request.Cookies["loginInCookie"].ToString()).SellerId;
+            var authorizedSellerId = _usersAndSellersService.GetByUserId(_userManager.GetUserId(User)).SellerId;
             if (productsSellerId != authorizedSellerId)
             {
                 return NotFound();

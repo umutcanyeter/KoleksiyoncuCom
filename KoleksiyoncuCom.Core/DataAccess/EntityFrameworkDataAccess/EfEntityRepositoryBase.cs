@@ -11,7 +11,7 @@ namespace KoleksiyoncuCom.Core.DataAccess.EntityFrameworkDataAccess
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             using (var context = new TContext())
             {
@@ -21,7 +21,7 @@ namespace KoleksiyoncuCom.Core.DataAccess.EntityFrameworkDataAccess
             }
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             using (var context = new TContext())
             {
@@ -31,7 +31,7 @@ namespace KoleksiyoncuCom.Core.DataAccess.EntityFrameworkDataAccess
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter = null)
+        public virtual TEntity Get(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
@@ -39,7 +39,7 @@ namespace KoleksiyoncuCom.Core.DataAccess.EntityFrameworkDataAccess
             }
         }
 
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public virtual List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
@@ -49,7 +49,7 @@ namespace KoleksiyoncuCom.Core.DataAccess.EntityFrameworkDataAccess
             }
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             using (var context = new TContext())
             {

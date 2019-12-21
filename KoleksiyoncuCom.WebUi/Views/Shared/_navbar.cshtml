@@ -35,15 +35,8 @@
         <ul class="navbar-nav my-2 my-lg-0">
             @if (User.Identity.IsAuthenticated)
             {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        100 TL
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Para <span class="badge badge-success">2</span></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-controller="Sepet" asp-action="Index">Sepete Git</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="Index" asp-controller="Sepet"> Sepet</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,7 +44,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a asp-controller="Profil" asp-action="Urunlerim" class="dropdown-item">Ürünlerim</a>
-                        <a asp-controller="Profil" asp-action="Profil Ayarları" class="dropdown-item">Ayarlar</a>
+                        <a asp-controller="Profil" asp-action="Ayarlar" class="dropdown-item">Ayarlar</a>
                         <div class="dropdown-divider"></div>
                         <a asp-controller="Hesap" asp-action="CikisYap" class="dropdown-item">Çıkış Yap</a>
                     </div>

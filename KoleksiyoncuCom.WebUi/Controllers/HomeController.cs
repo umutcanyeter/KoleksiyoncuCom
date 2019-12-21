@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using KoleksiyoncuCom.Bussiness.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using KoleksiyoncuCom.WebUi.Models;
+using Microsoft.AspNetCore.Identity;
+using KoleksiyoncuCom.WebUi.Identity;
 
 namespace KoleksiyoncuCom.WebUi.Controllers
 {

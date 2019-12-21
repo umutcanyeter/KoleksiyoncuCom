@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KoleksiyoncuCom.DataAccess\KoleksiyoncuCom.DataAccess.csproj" />
-    <ProjectReference Include="..\KoleksiyoncuCom.Entites\KoleksiyoncuCom.Entites.csproj" />
+    <ProjectReference Include="..\KoleksiyoncuCom.Entites\KoleksiyoncuCom.Entities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,14 +8,36 @@
     <script src="/modules/jquery/dist/jquery.min.js"></script>
     <script src="/modules/bootstrap/dist/js/bootstrap.js"></script>
     <link href="/modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    @RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 </head>
-<body> 
+<body>
     <div class="pb-5">
         <partial name="_navbar" />
     </div>
     <div class="p-5">
         @RenderBody()
+    </div>
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 col-xl-2 item">
+                        <h3>Hakkımızda</h3>
+                        <a href="#">Kuruluş</a>
+                        <a href="#">Takım</a>
+                        <a href="#">Kariyer</a>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <a class="text-center" href="#" style="padding-bottom:2px;">iyzico ile alışverişinizi güvenli bir şekilde yapabilirsiniz.</a>
+                        <img class="img-fluid" src="https://www.iyzico.com/assets/images/content/logo.svg?v=v4.0.98" />
+                    </div>
+                    <div class="col-sm-4 col-xl-5 item">
+                        <h3>Koleksiyoncu Nedir ?</h3>
+                        <p>Koleksiyoncu, Türkiye genelinde tüm koleksiyoncuların güvenli alış-veriş yapmasını amaçlayan aracı bir web sayfasıdır.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
