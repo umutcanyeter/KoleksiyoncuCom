@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KoleksiyoncuCom.Bussiness.Abstract;
 using KoleksiyoncuCom.Entites;
 using KoleksiyoncuCom.Entities;
+using KoleksiyoncuCom.WebUi.EmailServices;
 using KoleksiyoncuCom.WebUi.Identity;
 using KoleksiyoncuCom.WebUi.Models;
 using Microsoft.AspNetCore.Http;
@@ -19,12 +20,16 @@ namespace KoleksiyoncuCom.WebUi.Controllers
         private UserManager<ApplicationUser> _userManager;
         private ISellerService _sellerService;
         private IUsersAndSellersService _userAndSellersService;
-        public HesapController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ISellerService sellerService, IUsersAndSellersService userAndSellersService)
+        private IEmailSender _emailSender;
+        private ICartService _cartService;
+        public HesapController(ICartService cartService, IEmailSender emailSender, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ISellerService sellerService, IUsersAndSellersService userAndSellersService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _sellerService = sellerService;
             _userAndSellersService = userAndSellersService;
+            _emailSender = emailSender;
+            _cartService = cartService;
         }
         public IActionResult KayitOl()
         {
@@ -46,6 +51,14 @@ namespace KoleksiyoncuCom.WebUi.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callBackUrl = Url.Action("ConfirmEmail", "Hesap", new
+                {
+                    userId = user.Id,
+                    token = code
+                });
+                _cartService.InitializeCart(user.Id);
+                await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:44301{callBackUrl}'>tıklayınız.</a>");
                 var seller = new Seller
                 {
                     NameAndSurname = user.UserName,
@@ -79,13 +92,14 @@ namespace KoleksiyoncuCom.WebUi.Controllers
                 ModelState.AddModelError("", "Böyle bir koleksiyoncu bulunamadı.");
                 return View(model);
             }
+            if(!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError("", "Bu hesap e-posta ile onaylanmamış.");
+                return View(model);
+            }
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
             if (result.Succeeded)
             {
-                CookieOptions loginInCookie = new CookieOptions();
-                loginInCookie.Expires = DateTime.Now.AddMinutes(60);
-                Response.Cookies.Append("loginInCookie", user.Id, loginInCookie);
-                
                 return Redirect(returnUrl);
             }
             ModelState.AddModelError("", "Kullanıcı adı veya parola yanlış!");
@@ -94,9 +108,29 @@ namespace KoleksiyoncuCom.WebUi.Controllers
 
         public async Task<IActionResult> CikisYap()
         {
-            Response.Cookies.Delete("loginInCookie");
             await _signInManager.SignOutAsync();
             return Redirect("~/");
+        }
+
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if(userId == null || token == null)
+            {
+                TempData["message"] = "Geçersiz onay kodu.";
+                return View();
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                var result = await _userManager.ConfirmEmailAsync(user, token);
+                if (result.Succeeded)
+                {
+                    TempData["message"] = "Hesabınız onaylandı.";
+                    return View();
+                }
+            }
+            TempData["message"] = "Hesabınız onaylanamadı.";
+            return View();
         }
     }
 }

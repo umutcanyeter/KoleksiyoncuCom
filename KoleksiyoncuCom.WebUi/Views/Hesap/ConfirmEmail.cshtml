@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmEmail";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h1>E-Posta Onaylama</h1>
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-info" role="alert">@TempData["message"]</div>
+}v
+

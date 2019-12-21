@@ -6,6 +6,7 @@ using KoleksiyoncuCom.Bussiness.Abstract;
 using KoleksiyoncuCom.Bussiness.Concrete;
 using KoleksiyoncuCom.DataAccess.Abstract;
 using KoleksiyoncuCom.DataAccess.Concrete.EntityFramework;
+using KoleksiyoncuCom.WebUi.EmailServices;
 using KoleksiyoncuCom.WebUi.Identity;
 using KoleksiyoncuCom.WebUi.Middlewares;
 using Microsoft.AspNetCore.Builder;
@@ -31,10 +32,13 @@ namespace KoleksiyoncuCom.WebUi
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ISellerService, SellerManager>();
             services.AddScoped<IUsersAndSellersService, UsersAndSellersManager>();
+            services.AddScoped<ICartService, CartManager>();
             services.AddScoped<IProductDal, EfProductDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<ISellerDal, EfSellerDal>();
             services.AddScoped<IUsersAndSellersDal, EfUsersAndSellersDal>();
+            services.AddScoped<ICartDal, EfCartDal>();
+            services.AddTransient<IEmailSender,EmailSender>();
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
                 .AddDefaultTokenProviders();
@@ -50,7 +54,7 @@ namespace KoleksiyoncuCom.WebUi
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(7);
                 options.Lockout.AllowedForNewUsers = true;
 
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             services.ConfigureApplicationCookie(options =>

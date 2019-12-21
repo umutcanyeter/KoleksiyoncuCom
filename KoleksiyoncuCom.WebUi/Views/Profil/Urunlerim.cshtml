@@ -4,10 +4,21 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<h1>Ürünlerim</h1>
+
 @if (TempData["message"] != null)
 {
     <div class="alert alert-info" role="alert">@TempData["message"]</div>
 }
+<div class="container-fluid">
+    <div class="row text-left">
+        <div class="col-2">
+            <h1>Ürünlerim</h1>
+        </div>
+        <div class="col-10">
+            <button type="button" class="btn btn-outline-success">Ürün Ekle</button>
+        </div>
+    </div>
+
+</div>
 <partial name="_profileProducts" />
 
