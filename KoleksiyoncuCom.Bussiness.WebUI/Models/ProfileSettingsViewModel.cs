@@ -1,20 +1,18 @@
 ﻿using KoleksiyoncuCom.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace KoleksiyoncuCom.WebUi.Models
+namespace KoleksiyoncuCom.Bussiness.WebUi.Models
 {
     public class ProfileSettingsViewModel
     {
-        public int BuyerId { get; set; }
+        public int SellerId { get; set; }
         [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
-        public string BuyerName { get; set; }
+        public string SellerName { get; set; }
         [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
-        public string Adress { get; set; }
-        [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
-        public string ProfileImageUrl { get; set; }
+        public string Location { get; set; }
     }
 }

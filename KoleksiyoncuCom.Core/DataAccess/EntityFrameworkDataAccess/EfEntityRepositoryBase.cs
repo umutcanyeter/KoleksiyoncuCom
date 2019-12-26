@@ -53,8 +53,7 @@ namespace KoleksiyoncuCom.Core.DataAccess.EntityFrameworkDataAccess
         {
             using (var context = new TContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Modified;
+                context.Entry(entity).State = EntityState.Modified;
                 context.SaveChanges();
             }
         }

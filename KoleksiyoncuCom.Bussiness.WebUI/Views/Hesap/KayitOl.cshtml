@@ -1,4 +1,4 @@
-﻿@model KoleksiyoncuCom.WebUi.Models.RegisterModel
+﻿@model KoleksiyoncuCom.WebUi.Bussiness.Models.RegisterModel
 @{
     ViewData["Title"] = "Kayıt Ol";
     Layout = "~/Views/_Layout.cshtml";
@@ -16,29 +16,26 @@
                 <div class="text-danger">@ViewBag.ErrorMessage</div>
             }
         <form class="form-signin" asp-controller="Hesap" asp-action="KayitOl" method="post">
-            <h1 class="text-success">Koleksiyoncu</h1>
+            <h1 class="text-success">Koleksiyoncu | Bussiness</h1>
             <h3 class="h3 mb-3 font-weight-normal">Kayıt Ol</h3>
-            <label asp-for="Email" class="sr-only"></label>
-            <input asp-for="Email" value="@Model.Email" class="form-control" placeholder="E-Posta Adresi">
-            <span asp-validation-for="Email" class="text-danger"></span>
-            <label asp-for="UserName" class="sr-only"></label>
-            <input asp-for="UserName" value="@Model.UserName" class="form-control" placeholder="Kullanıcı Adı">
-            <span asp-validation-for="UserName" class="text-danger"></span>
+            <label asp-for="EmailAdress" class="sr-only"></label>
+            <input asp-for="EmailAdress" value="@Model.EmailAdress" class="form-control" placeholder="E-Posta Adresi">
+            <span asp-validation-for="EmailAdress" class="text-danger"></span>
+            <label asp-for="NameAndSurname" class="sr-only"></label>
+            <input asp-for="NameAndSurname" value="@Model.NameAndSurname" class="form-control" placeholder="Kullanıcı Adı">
+            <span asp-validation-for="NameAndSurname" class="text-danger"></span>
             <label asp-for="Password" class="sr-only"></label>
             <input asp-for="Password" value="@Model.Password" class="form-control" placeholder="Parola">
             <span asp-validation-for="Password" class="text-danger"></span>
             <label asp-for="RePassword" class="sr-only"></label>
             <input asp-for="RePassword" value="@Model.RePassword" class="form-control" placeholder="Parola Tekrar">
             <span asp-validation-for="RePassword" class="text-danger"></span>
-            <label asp-for="Adress" class="sr-only"></label>
-            <input asp-for="Adress" value="@Model.Adress" class="form-control" placeholder="Adres">
-            <span asp-validation-for="Adress" class="text-danger"></span>
+            <label asp-for="Location" class="sr-only"></label>
+            <input asp-for="Location" value="@Model.Location" class="form-control" placeholder="İl,ilçe">
+            <span asp-validation-for="Location" class="text-danger"></span>
             <label asp-for="PhoneNumber" class="sr-only"></label>
             <input asp-for="PhoneNumber" value="@Model.PhoneNumber" class="form-control" placeholder="Telefon Numarası">
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            <label asp-for="ProfileImageUrl" class="sr-only"></label>
-            <input asp-for="ProfileImageUrl" value="@Model.ProfileImageUrl" class="form-control" placeholder="Profil Resmi">
-            <span asp-validation-for="ProfileImageUrl" class="text-danger"></span>
             <button class="btn btn-lg btn-success btn-block" type="submit">Kayıt Ol</button>
             <p class="mt-5 mb-3 text-muted">&copy;2019 Duru Yazılım Teknolojileri A.Ş.</p>
         </form>

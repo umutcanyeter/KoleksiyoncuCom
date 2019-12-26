@@ -1,4 +1,4 @@
-﻿@model KoleksiyoncuCom.WebUi.Models.ProfileSettingsViewModel
+﻿@model KoleksiyoncuCom.Bussiness.WebUi.Models.ProfileSettingsViewModel
 @{
     ViewData["Title"] = "Profil Ayarları";
     Layout = "~/Views/_Layout.cshtml";
@@ -16,13 +16,8 @@
 <form asp-action="Ayarlar" asp-controller="Profil" method="post">
     <div class="form-group">
         <label>Kullanıcı Adı</label>
-        <input asp-for="BuyerName" type="text" class="form-control" value="@Model.BuyerName">
-        <span asp-validation-for="BuyerName"></span>
-    </div>
-    <div class="form-group">
-        <label>Profil Resmi URL'si</label>
-        <input asp-for="ProfileImageUrl" type="text" class="form-control" value="@Model.ProfileImageUrl">
-        <span asp-validation-for="ProfileImageUrl"></span>
+        <input asp-for="SellerName" type="text" class="form-control" value="@Model.SellerName">
+        <span asp-validation-for="SellerName"></span>
     </div>
     <div class="form-group">
         <label>Telefon Numarası</label>
@@ -35,13 +30,13 @@
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
-        <label>Adres</label>
-        <input asp-for="Adress" type="text" class="form-control" value="@Model.Adress">
-        <span asp-validation-for="Adress"></span>
+        <label>İl,ilçe</label>
+        <input asp-for="Location" type="text" class="form-control" value="@Model.Location">
+        <span asp-validation-for="Location"></span>
     </div>
     <div class="form-group">
-        <input asp-for="BuyerId" type="hidden" class="form-control" value="@Model.BuyerId">
-        <span asp-validation-for="BuyerId"></span>
+        <input asp-for="SellerId" type="hidden" class="form-control" value="@Model.SellerId">
+        <span asp-validation-for="SellerId"></span>
     </div>
     <button type="submit" class="btn btn-success">Bilgileri Güncelle</button>
 </form>

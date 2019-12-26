@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KoleksiyoncuCom.WebUi.Identity
+namespace KoleksiyoncuCom.WebUi.Bussiness.Identity
 {
     public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
     {

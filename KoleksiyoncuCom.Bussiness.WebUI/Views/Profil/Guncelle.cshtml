@@ -1,0 +1,38 @@
+﻿@model KoleksiyoncuCom.Bussiness.WebUi.Models.ProductModel
+@{
+    ViewData["Title"] = "Ürün Güncelleme";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h1>Ürün Güncelleme</h1>
+
+<form asp-action="Guncelle" asp-controller="Profil" method="post">
+    <div class="form-group">
+        <label>Ürün Adı</label>
+        <input asp-for="ProductName" type="text" class="form-control" value="@Model.ProductName">
+    </div>
+    <div class="form-group">
+        <label>Fiyat(&#8378;)</label>
+        <input asp-for="ProductUnitPrice" type="text" class="form-control" value="@Model.ProductUnitPrice">
+    </div>
+    <div class="form-group">
+        <label>Stok</label>
+        <input asp-for="ProductUnitsInStock" type="text" class="form-control" value="@Model.ProductUnitsInStock">
+    </div>
+    <div class="form-group">
+        <label>Kategori</label>
+        <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Category,"CategoryId","CategoryName"))"></select>
+    </div>
+    <div class="form-group">
+        <label>Görsel URL'si</label>
+        <input asp-for="ImageUrl" type="text" class="form-control" value="@Model.ImageUrl">
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        <input asp-for="Description" type="text" class="form-control" value="@Model.Description">
+    </div>
+    <input asp-for="ProductId" type="hidden" value="@Model.ProductId" />
+    <input asp-for="SellerId" type="hidden" value="@Model.SellerId" />
+    <button type="submit" class="btn btn-success">Ürünü Güncelle</button>
+</form>
+

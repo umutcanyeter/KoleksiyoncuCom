@@ -1,0 +1,24 @@
+﻿@model KoleksiyoncuCom.Bussiness.WebUi.Models.ProfileProductsViewModel
+@{
+    ViewData["Title"] = "Ürünlerim";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-info" role="alert">@TempData["message"]</div>
+}
+<div class="container-fluid">
+    <div class="row text-left">
+        <div class="col-2">
+            <h1>Ürünlerim</h1>
+        </div>
+        <div class="col-10">
+            <a asp-action="Ekle" asp-controller="Profil" type="button" class="btn btn-outline-success">Ürün Ekle</a>
+        </div>
+    </div>
+
+</div>
+<partial name="_profileProducts" />
+

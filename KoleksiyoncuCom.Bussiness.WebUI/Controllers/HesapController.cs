@@ -5,32 +5,30 @@ using System.Threading.Tasks;
 using KoleksiyoncuCom.Bussiness.Abstract;
 using KoleksiyoncuCom.Entites;
 using KoleksiyoncuCom.Entities;
-using KoleksiyoncuCom.WebUi.EmailServices;
-using KoleksiyoncuCom.WebUi.Identity;
-using KoleksiyoncuCom.WebUi.Models;
+using KoleksiyoncuCom.WebUi.Bussiness.EmailServices;
+using KoleksiyoncuCom.WebUi.Bussiness.Identity;
+using KoleksiyoncuCom.WebUi.Bussiness.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KoleksiyoncuCom.WebUi.Controllers
+namespace KoleksiyoncuCom.Bussiness.WebUi.Controllers
 {
     public class HesapController : Controller
     {
         private SignInManager<ApplicationUser> _signInManager;
         private UserManager<ApplicationUser> _userManager;
-        private IBuyerService _buyerService;
-        private IUsersAndBuyersService _userAndBuyersService;
+        private ISellerService _sellerService;
+        private IUsersAndSellersService _userAndSellersService;
         private IEmailSender _emailSender;
-        private ICartService _cartService;
         private RoleManager<ApplicationRole> _roleManager;
-        public HesapController(RoleManager<ApplicationRole> roleManager, ICartService cartService, IEmailSender emailSender, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IBuyerService buyerService, IUsersAndBuyersService userAndBuyersService)
+        public HesapController(RoleManager<ApplicationRole> roleManager, IEmailSender emailSender, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ISellerService sellerService, IUsersAndSellersService userAndSellersService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _buyerService = buyerService;
-            _userAndBuyersService = userAndBuyersService;
+            _sellerService = sellerService;
+            _userAndSellersService = userAndSellersService;
             _emailSender = emailSender;
-            _cartService = cartService;
             _roleManager = roleManager;
         }
         public IActionResult KayitOl()
@@ -47,8 +45,8 @@ namespace KoleksiyoncuCom.WebUi.Controllers
             }
             var user = new ApplicationUser
             {
-                UserName = model.UserName,
-                Email = model.Email
+                UserName = model.NameAndSurname,
+                Email = model.EmailAdress
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -59,20 +57,19 @@ namespace KoleksiyoncuCom.WebUi.Controllers
                     userId = user.Id,
                     token = code
                 });
-                _cartService.InitializeCart(user.Id);
-                await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:44301{callBackUrl}'>tıklayınız.</a>");
-                var buyer = new Buyer
+                await _emailSender.SendEmailAsync(model.EmailAdress, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:44301{callBackUrl}'>tıklayınız.</a>");
+                var seller = new Seller
                 {
-                    BuyerName = user.UserName,
-                    Email = user.Email,
-                    Adress = model.Adress,
+                    NameAndSurname = model.NameAndSurname,
+                    EmailAdress = model.EmailAdress,
+                    Location = model.Location,
                     PhoneNumber = model.PhoneNumber,
-                    ProfileImageUrl = model.ProfileImageUrl
+                    Rate = 0
                 };
-                _buyerService.Add(buyer);
-                var buyerId = buyer.BuyerId;
-                _userAndBuyersService.Add(new UsersAndBuyers { BuyerId = buyerId, UserId = user.Id });
-                var addToRole = await _userManager.AddToRoleAsync(user, "Buyer");
+                _sellerService.Add(seller);
+                var sellerId = seller.SellerId;
+                _userAndSellersService.Add(new UsersAndSellers { SellerId = sellerId, UserId = user.Id });
+                var addToRole = await _userManager.AddToRoleAsync(user, "Seller");
                 if (addToRole.Succeeded)
                 {
                     return RedirectToAction("GirisYap", "Hesap");
@@ -91,22 +88,22 @@ namespace KoleksiyoncuCom.WebUi.Controllers
         public async Task<IActionResult> GirisYap(LoginModel model, string returnUrl = null)
         {
             returnUrl = returnUrl ?? "~/";
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
             var user = await _userManager.FindByNameAsync(model.UserName);
-            if(user == null)
+            if (user == null)
             {
                 ModelState.AddModelError("", "Böyle bir koleksiyoncu bulunamadı.");
                 return View(model);
             }
-            if(!await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 ModelState.AddModelError("", "Bu hesap e-posta ile onaylanmamış.");
                 return View(model);
             }
-            if (!await _userManager.IsInRoleAsync(user, "Buyer"))
+            if (!await _userManager.IsInRoleAsync(user,"Seller"))
             {
                 ModelState.AddModelError("", "Bu hesap satıcı hesabı değil!");
                 return View(model);
@@ -128,7 +125,7 @@ namespace KoleksiyoncuCom.WebUi.Controllers
 
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
-            if(userId == null || token == null)
+            if (userId == null || token == null)
             {
                 TempData["message"] = "Geçersiz onay kodu.";
                 return View();

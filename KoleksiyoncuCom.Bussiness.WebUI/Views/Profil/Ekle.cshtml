@@ -1,0 +1,46 @@
+﻿@model KoleksiyoncuCom.Bussiness.WebUi.Models.ProductModel
+@{
+    ViewData["Title"] = "Ürün Ekle";
+    Layout = "~/Views/_Layout.cshtml";
+}
+@section Scripts {
+    <script src="~/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<h1>Ürün Ekle</h1>
+<form asp-action="Ekle" asp-controller="Profil" method="post">
+    <div class="form-group">
+        <label>Ürün Adı</label>
+        <input asp-for="ProductName" type="text" class="form-control" value="@Model.ProductName">
+        <span asp-validation-for="ProductName"></span>
+    </div>
+    <div class="form-group">
+        <label>Fiyat(&#8378;)</label>
+        <input asp-for="ProductUnitPrice" type="text" class="form-control" value="@Model.ProductUnitPrice">
+        <span asp-validation-for="ProductUnitPrice"></span>
+    </div>
+    <div class="form-group">
+        <label>Stok</label>
+        <input asp-for="ProductUnitsInStock" type="text" class="form-control" value="@Model.ProductUnitsInStock">
+        <span asp-validation-for="ProductUnitsInStock"></span>
+    </div>
+    <div class="form-group">
+        <label>Kategori</label>
+        <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Category,"CategoryId","CategoryName"))"></select>
+        <span asp-validation-for="CategoryId"></span>
+    </div>
+    <div class="form-group">
+        <label>Görsel URL'si</label>
+        <input asp-for="ImageUrl" type="text" class="form-control" value="@Model.ImageUrl">
+        <span asp-validation-for="ImageUrl"></span>
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        <input asp-for="Description" type="text" class="form-control" value="@Model.Description">
+        <span asp-validation-for="Description"></span>
+    </div>
+    <input asp-for="SellerId" type="hidden" value="@Model.SellerId" />
+    <button type="submit" class="btn btn-success">Ürünü Ekle</button>
+</form>
+

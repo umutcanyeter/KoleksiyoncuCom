@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KoleksiyoncuCom.WebUi.Areas.Bussiness.Controllers
+namespace KoleksiyoncuCom.Bussiness.WebUI.Controllers
 {
-    [Area("Bussiness")]
     public class HomeController : Controller
     {
         public IActionResult Index()

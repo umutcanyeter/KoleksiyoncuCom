@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Hoşgeldiniz, @User.Identity.Name</h1>
+}
+else
+{
+    <h1>Giriş Yap</h1>
+}
+

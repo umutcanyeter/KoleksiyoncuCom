@@ -19,7 +19,7 @@ namespace KoleksiyoncuCom.WebUi.Controllers
             _productService = productService;
             _categoryService = categoryService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var homePageProductListViewModel = new HomePageProductListViewModel
             {

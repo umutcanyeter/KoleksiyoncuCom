@@ -4,21 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using KoleksiyoncuCom.Bussiness.Abstract;
 using KoleksiyoncuCom.Bussiness.Concrete;
+using KoleksiyoncuCom.Bussiness.WebUi.EmailServices;
+using KoleksiyoncuCom.Bussiness.WebUi.Middlewares;
 using KoleksiyoncuCom.DataAccess.Abstract;
 using KoleksiyoncuCom.DataAccess.Concrete.EntityFramework;
-using KoleksiyoncuCom.WebUi.EmailServices;
-using KoleksiyoncuCom.WebUi.Identity;
-using KoleksiyoncuCom.WebUi.Middlewares;
+using KoleksiyoncuCom.WebUi.Bussiness.EmailServices;
+using KoleksiyoncuCom.WebUi.Bussiness.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace KoleksiyoncuCom.WebUi
+namespace KoleksiyoncuCom.Bussiness.WebUI
 {
     public class Startup
     {
@@ -42,7 +42,7 @@ namespace KoleksiyoncuCom.WebUi
             services.AddScoped<IUsersAndSellersDal, EfUsersAndSellersDal>();
             services.AddScoped<IUsersAndBuyersDal, EfUsersAndBuyersDal>();
             services.AddScoped<ICartDal, EfCartDal>();
-            services.AddTransient<IEmailSender,EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
                 .AddDefaultTokenProviders();
@@ -71,7 +71,7 @@ namespace KoleksiyoncuCom.WebUi
                 options.Cookie = new CookieBuilder
                 {
                     HttpOnly = true,
-                    Name = ".KoleksiyoncuCom.Security.Cookie"
+                    Name = ".KoleksiyoncuCom.Bussiness.Security.Cookie"
                 };
             });
         }

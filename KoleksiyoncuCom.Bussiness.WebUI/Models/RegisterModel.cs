@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KoleksiyoncuCom.WebUi.Models
+namespace KoleksiyoncuCom.WebUi.Bussiness.Models
 {
     public class RegisterModel
     {
         [Required]
-        public string UserName { get; set; }
+        public string NameAndSurname { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -18,16 +18,12 @@ namespace KoleksiyoncuCom.WebUi.Models
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string EmailAdress { get; set; }
 
         [Required]
-        public string Adress { get; set; }
+        public string Location { get; set; }
         
         [Required]
         public string PhoneNumber { get; set; }
-
-        [Required]
-        public string ProfileImageUrl { get; set; }
-
     }
 }
