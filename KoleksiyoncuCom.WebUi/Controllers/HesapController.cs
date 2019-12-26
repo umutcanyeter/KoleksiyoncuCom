@@ -61,13 +61,6 @@ namespace KoleksiyoncuCom.WebUi.Controllers
                 });
                 _cartService.InitializeCart(user.Id);
                 await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:44301{callBackUrl}'>tıklayınız.</a>");
-                var seller = new Seller
-                {
-                    userId = user.Id,
-                    token = code
-                });
-                _cartService.InitializeCart(user.Id);
-                await _emailSender.SendEmailAsync(model.Email, "Hesabınızı Onaylayınız.", $"Lütfen email hesabınızı onaylamak için linke <a href='http://localhost:44301{callBackUrl}'>tıklayınız.</a>");
                 var buyer = new Buyer
                 {
                     BuyerName = user.UserName,

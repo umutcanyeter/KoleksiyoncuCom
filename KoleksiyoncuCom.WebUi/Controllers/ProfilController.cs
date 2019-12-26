@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KoleksiyoncuCom.WebUi.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Buyer")]
     public class ProfilController : Controller
     {
         private IUsersAndBuyersService _usersAndBuyersService;

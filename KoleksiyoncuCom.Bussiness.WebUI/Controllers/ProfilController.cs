@@ -13,7 +13,7 @@ using KoleksiyoncuCom.Bussiness.WebUi.Models;
 
 namespace KoleksiyoncuCom.Bussiness.WebUi.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Seller"])
     public class ProfilController : Controller
     {
         private IUsersAndSellersService _usersAndSellersService;
