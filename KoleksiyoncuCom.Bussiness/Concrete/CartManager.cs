@@ -38,6 +38,11 @@ namespace KoleksiyoncuCom.Bussiness.Concrete
             }
         }
 
+        public void DeleteByCartId(string cartId)
+        {
+            _cartDal.DeleteByCartId(cartId);
+        }
+
         public void DeleteFromCart(string userId, int productId)
         {
             var cart = GetCartByUserId(userId);

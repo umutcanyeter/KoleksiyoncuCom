@@ -13,5 +13,7 @@ namespace KoleksiyoncuCom.Entities
         public string PhoneNumber { get; set; }
         public string Adress { get; set; }
         public string ProfileImageUrl { get; set; }
+        public string LastLoginDate { get; set; }
+        public string RegistrationDate { get; set; }
     }
 }

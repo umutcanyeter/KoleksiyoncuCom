@@ -4,14 +4,16 @@ using KoleksiyoncuCom.DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KoleksiyoncuCom.DataAccess.Migrations
 {
     [DbContext(typeof(KoleksiyoncuComDbContext))]
-    partial class KoleksiyoncuComDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191226200050_orderEntities")]
+    partial class orderEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,16 +55,10 @@ namespace KoleksiyoncuCom.DataAccess.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastLoginDate")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegistrationDate")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BuyerId");
@@ -201,9 +197,6 @@ namespace KoleksiyoncuCom.DataAccess.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
@@ -256,13 +249,10 @@ namespace KoleksiyoncuCom.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("EmailAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameAndSurname")
@@ -273,9 +263,6 @@ namespace KoleksiyoncuCom.DataAccess.Migrations
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("VerifiedSeller")
-                        .HasColumnType("bit");
 
                     b.HasKey("SellerId");
 

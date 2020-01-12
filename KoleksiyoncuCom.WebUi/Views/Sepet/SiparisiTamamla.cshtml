@@ -1,0 +1,118 @@
+﻿@model KoleksiyoncuCom.WebUi.Models.OrderModel
+@{
+    ViewData["Title"] = "Siparişi Tamamla";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h1>Siparişi Tamamla</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="mb-3">Sipariş Detayları</h4>
+        <form asp-action="SiparisiTamamla" asp-controller="Sepet" method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Ad</label>
+                    <input asp-for="@Model.FirstName" value="@Model.FirstName" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Soyad</label>
+                    <input asp-for="@Model.LastName" value="@Model.LastName" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Posta Kodu</label>
+                    <input asp-for="@Model.ZipCode" value="@Model.ZipCode" class="form-control" />
+                </div>
+                <div class="col-md-9 mb-3">
+                    <label>Adres</label>
+                    <textarea asp-for="@Model.Address" value="@Model.Address" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Şehir</label>
+                    <input asp-for="@Model.City" value="@Model.City" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Telefon Numarası</label>
+                    <input asp-for="@Model.Phone" value="@Model.Phone" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>E-Posta Adresi</label>
+                    <input asp-for="@Model.Email" value="@Model.Email" class="form-control" />
+                </div>
+                <input type="hidden" value="@Model.BuyerId" asp-for="@Model.BuyerId" />
+            </div>
+            <hr class="mb-4" />
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="save-info">
+                <label class="custom-control-label" for="save-info">Bir sonraki alışveriş için bilgilerimi sakla</label>
+            </div>
+            <hr class="mb-4" />
+            <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                    <label class="custom-control-label" for="credit">Kredi/Banka Kartı</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                    <label class="custom-control-label" for="eft">EFT</label>
+                </div>
+            </div>
+            <h4 class="mb-3">Ödeme Bilgileri</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Kart Üzerindeki İsim</label>
+                    <input asp-for="@Model.CardName" value="@Model.CardName" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Kart Numarası</label>
+                    <input asp-for="@Model.CardNumber" value="@Model.CardNumber" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Ay</label>
+                    <input asp-for="@Model.ExpirationMonth" value="@Model.ExpirationMonth" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Yıl</label>
+                    <input asp-for="@Model.ExpirationYear" value="@Model.ExpirationYear" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>CVV</label>
+                    <input asp-for="@Model.Cvv" value="@Model.Cvv" class="form-control" />
+                </div>
+            </div>
+            <hr class="mb-4" />
+            <button type="submit" class="btn btn-success btn-lg btn-block">Siparişi Tamamla</button>
+        </form>
+    </div>
+    <div class="col-md-4 mb-4">
+
+        <h4 class="mb-3">
+            <span class="text-muted">Sepet Özeti</span>
+        </h4>
+        <ul class="list-group mb-3">
+            @foreach (var item in Model.CartModel.CartItems)
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                        <h6 class="my-0">
+                            @item.Name
+                        <small>x @item.Quantity</small>
+                    </h6>
+                </div>
+                    <span class="text-muted">@item.Price &#8378;</span>
+            </li>
+        }
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Toplam (&#8378;)</span>
+                <strong>@Model.CartModel.TotalPrice() &#8378;</strong>
+            </li>
+        </ul>
+
+    </div>
+</div>

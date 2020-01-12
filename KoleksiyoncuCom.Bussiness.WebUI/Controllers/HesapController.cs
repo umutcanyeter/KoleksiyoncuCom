@@ -62,9 +62,11 @@ namespace KoleksiyoncuCom.Bussiness.WebUi.Controllers
                 {
                     NameAndSurname = model.NameAndSurname,
                     EmailAdress = model.EmailAdress,
-                    Location = model.Location,
+                    City = model.City,
+                    Adress = model.Adress,
                     PhoneNumber = model.PhoneNumber,
-                    Rate = 0
+                    Rate = 0,
+                    VerifiedSeller = false
                 };
                 _sellerService.Add(seller);
                 var sellerId = seller.SellerId;

@@ -11,5 +11,6 @@ namespace KoleksiyoncuCom.Bussiness.Abstract
         Cart GetCartByUserId(string userId);
         void AddToCart(string userId, int productId, int quantity);
         void DeleteFromCart(string userId, int productId);
+        void DeleteByCartId(string cartId);
     }
 }

@@ -28,6 +28,7 @@ namespace KoleksiyoncuCom.WebUi
         {
             services.AddDbContext<ApplicationIdentityDbContext>(options => options.UseSqlServer(@"Server=UMUTCAN\SQLEXPRESS;Initial Catalog=KoleksiyoncuCom;Integrated Security=true"));
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ISellerService, SellerManager>();
@@ -35,6 +36,7 @@ namespace KoleksiyoncuCom.WebUi
             services.AddScoped<IUsersAndSellersService, UsersAndSellersManager>();
             services.AddScoped<IUsersAndBuyersService, UsersAndBuyersManager>();
             services.AddScoped<ICartService, CartManager>();
+            services.AddScoped<IOrderService, OrderManager>();
             services.AddScoped<IProductDal, EfProductDal>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<ISellerDal, EfSellerDal>();
@@ -42,6 +44,7 @@ namespace KoleksiyoncuCom.WebUi
             services.AddScoped<IUsersAndSellersDal, EfUsersAndSellersDal>();
             services.AddScoped<IUsersAndBuyersDal, EfUsersAndBuyersDal>();
             services.AddScoped<ICartDal, EfCartDal>();
+            services.AddScoped<IOrderDal, EfOrderDal>();
             services.AddTransient<IEmailSender,EmailSender>();
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>()

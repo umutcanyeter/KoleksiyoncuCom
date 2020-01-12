@@ -17,5 +17,6 @@ namespace KoleksiyoncuCom.DataAccess.Concrete.EntityFramework
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<UsersAndBuyers> UsersAndBuyers { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

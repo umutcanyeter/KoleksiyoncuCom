@@ -21,8 +21,11 @@ namespace KoleksiyoncuCom.WebUi.Bussiness.Models
         public string EmailAdress { get; set; }
 
         [Required]
-        public string Location { get; set; }
-        
+        public string City { get; set; }
+
+        [Required]
+        public string Adress { get; set; }
+
         [Required]
         public string PhoneNumber { get; set; }
     }

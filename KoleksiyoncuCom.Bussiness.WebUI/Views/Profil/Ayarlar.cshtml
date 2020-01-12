@@ -30,9 +30,14 @@
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
-        <label>İl,ilçe</label>
-        <input asp-for="Location" type="text" class="form-control" value="@Model.Location">
-        <span asp-validation-for="Location"></span>
+        <label>İl</label>
+        <input asp-for="City" type="text" class="form-control" value="@Model.City">
+        <span asp-validation-for="City"></span>
+    </div>
+    <div class="form-group">
+        <label>Adres</label>
+        <input asp-for="Adress" type="text" class="form-control" value="@Model.Adress">
+        <span asp-validation-for="Adress"></span>
     </div>
     <div class="form-group">
         <input asp-for="SellerId" type="hidden" class="form-control" value="@Model.SellerId">

@@ -13,6 +13,8 @@ namespace KoleksiyoncuCom.Bussiness.WebUi.Models
         [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
-        public string Location { get; set; }
+        public string City { get; set; }
+        [Required(ErrorMessage = "Bu alan boş bırakılamaz.")]
+        public string Adress { get; set; }
     }
 }

@@ -6,10 +6,7 @@ using System.Text;
 
 namespace KoleksiyoncuCom.DataAccess.Abstract
 {
-    public interface ICartDal : IEntityRepository<Cart>
+    public interface IOrderDal : IEntityRepository<Order>
     {
-        Cart GetByUserId(string userId);
-        void DeleteFromCart(int cartId, int productId);
-        void DeleteByCartId(string cartId);
     }
 }

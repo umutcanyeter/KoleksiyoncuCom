@@ -67,7 +67,8 @@ namespace KoleksiyoncuCom.WebUi.Controllers
                     Email = user.Email,
                     Adress = model.Adress,
                     PhoneNumber = model.PhoneNumber,
-                    ProfileImageUrl = model.ProfileImageUrl
+                    ProfileImageUrl = model.ProfileImageUrl,
+                    RegistrationDate = DateTime.Now.ToString("yyyy-mm-dd hh:mm:ss")
                 };
                 _buyerService.Add(buyer);
                 var buyerId = buyer.BuyerId;
@@ -114,6 +115,10 @@ namespace KoleksiyoncuCom.WebUi.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
             if (result.Succeeded)
             {
+                var buyerId = _userAndBuyersService.GetByUserId(user.Id).BuyerId;
+                var buyer = _buyerService.GetById(buyerId);
+                buyer.LastLoginDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                _buyerService.Update(buyer);
                 return Redirect(returnUrl);
             }
             ModelState.AddModelError("", "Kullanıcı adı veya parola yanlış!");

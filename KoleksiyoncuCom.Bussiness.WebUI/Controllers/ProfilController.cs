@@ -13,7 +13,7 @@ using KoleksiyoncuCom.Bussiness.WebUi.Models;
 
 namespace KoleksiyoncuCom.Bussiness.WebUi.Controllers
 {
-    [Authorize(Roles = "Seller"])
+    [Authorize(Roles = "Seller")]
     public class ProfilController : Controller
     {
         private IUsersAndSellersService _usersAndSellersService;
@@ -38,7 +38,8 @@ namespace KoleksiyoncuCom.Bussiness.WebUi.Controllers
             {
                 SellerId = seller.SellerId,
                 SellerName = seller.NameAndSurname,
-                Location = seller.Location,
+                City = seller.City,
+                Adress = seller.Adress,
                 Email = seller.EmailAdress,
                 PhoneNumber = seller.PhoneNumber
             };
@@ -52,7 +53,8 @@ namespace KoleksiyoncuCom.Bussiness.WebUi.Controllers
             {
                 SellerId = model.SellerId,
                 NameAndSurname = model.SellerName,
-                Location = model.Location,
+                City = model.City,
+                Adress = model.Adress,
                 EmailAdress = model.Email,
                 PhoneNumber = model.PhoneNumber
             };

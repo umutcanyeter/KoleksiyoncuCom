@@ -39,5 +39,14 @@ namespace KoleksiyoncuCom.DataAccess.Concrete.EntityFramework
                 context.Database.ExecuteSqlCommand(cmd, cartId, productId);
             }
         }
+
+        public void DeleteByCartId(string cartId)
+        {
+            using (var context = new KoleksiyoncuComDbContext())
+            {
+                var cmd = @"delete from CardItem where CartId=@p0";
+                context.Database.ExecuteSqlCommand(cmd, cartId);
+            }
+        }
     }
 }
